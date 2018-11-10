@@ -1,0 +1,235 @@
+<DOCTYPE html>
+  <head>
+  <title>Swag Depot</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="css/lightbox.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+  <link href="./css/fbphotobox.css" rel="stylesheet" type="text/css" />
+  <script src="./js/fbphotobox.js"></script>
+
+
+  <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main1.css">
+    <link rel="stylesheet" href="css/examples.css">
+
+   
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/fontawesome-stars.css">
+
+ 
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <script>
+      $(document).ready(function() {
+        $(".fbphotobox img").fbPhotoBox({
+          rightWidth: 360,
+          leftBgColor: "black",
+          rightBgColor: "white",
+          footerBgColor: "black",
+          overlayBgColor: "#222",
+          containerClassName: 'fbphotobox',
+          imageClassName: 'photo',
+          onImageShow: function() {
+            $(".fbphotobox img").fbPhotoBox("addTags",
+              [{x:0.3,y:0.3,w:0.3,h:0.3}]
+              );
+            $(".fbphotobox-image-content").html('<div style="font-size:16px;">'+$(this).attr("alt")+'</div>'+$(this).attr("src"));
+
+            $(".fbphotobox-container-right").html('<div style="font-size:26px;">' + '<p>COMMENTS:</p>' + '</div>' +'<select id="example"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>' +
+              '<form id="comment"> <textarea name="comments" id="comments" cols="25" rows="3"></textarea><input type="submit" value="submit" /></form>');
+
+              $('#example').barrating({
+              theme: 'fontawesome-stars'});
+
+                
+                // Rating callbacks:
+                /*onSelect:function(value, text, event)
+                Fired when a rating is selected.
+                Notice: If the rating was set programmatically by using the `set` method event will be null.
+
+              onClear:function(value, text)
+              Fired when a rating is cleared.
+
+              onDestroy:function(value, text)
+              Fired when a rating is destroyed.*/
+
+
+
+
+
+
+            
+          }
+        });
+
+     /*   $("button").click(function() {
+          $( ".fbphotobox" ).append('<img class="photo" fbphotobox-src="./images/dummy-1760x990-Mosque.jpg" src="./images/dummy-1760x990-Mosque.jpg"/><img class="photo" fbphotobox-src="./images/dummy-1920x2560-Goemetry.jpg" src="./images/dummy-1920x2560-Goemetry.jpg"/>');
+        });*/
+      });
+    </script>
+    <style>
+      .fbphotobox img {
+        width:200px;
+        height:200px;
+        margin:12px;
+        border-radius:5px;
+      }
+
+      .fbphotobox img:hover {
+        box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        -webkit-box-sizing:border-box;
+        border: 5px solid #4AE;
+      }
+    </style>
+
+  </head>
+  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#myPage">Swag Depo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><button type="button" class="btn btn-info btn-lg" onclick="switchHome()">Profile</button></li>
+            <li><button type="button" class="btn btn-info btn-lg" onclick="switchMain()">Sign Out</button></li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    
+
+
+    <div class ="spacer">
+    </div>
+
+    <div class="fbphotobox">
+      <a><img class="photo" fbphotobox-src="img/1.jpg" alt="HELLLLLOOOOOOOO" src="img/1.jpg"/></a>
+      <a><img class="photo" fbphotobox-src="img/hp1.jpg" src="img/hp1.jpg"/></a>
+    </div>
+
+    <div class = "text-center">
+     <a class="down-arrow" data-toggle="tooltip" title="Load More Images">
+       <p><button style="background-color:grey;border:grey;"onclick="callServer()">Load More Images</button></p>
+       <span class="glyphicon glyphicon-chevron-down"></span>
+     </a><br><br>
+   </div>
+
+
+
+   <footer class="text-center">
+    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a><br><br>
+    <pre>Made By SD Incorporated</pre>
+  </footer>
+
+
+  <style>
+    p{
+      margin: -5px;
+    }
+    .FeedPics{
+      padding-top: 70px;
+    }
+    .Feed li {
+      margin-left: 10px;
+      height: 300px;
+      margin-bottom: 20px;
+      float:left;
+      border-style: groove;
+      overflow:hidden;
+      border-radius: 0px;
+      border: 2px solid #444;
+
+    }
+    .Picture img {
+      height:300px;
+      display: flex;
+      vertical-align: middle;
+      width: 285px;
+      text-align: center;
+      opacity: .75;
+      position: relative;
+
+    }
+    .Picture img:hover {
+      opacity: 1;
+    }
+    body{
+      background-color: grey;
+    }
+    .text-center{
+      clear:both;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+  <script src="./js/fbphotobox.js"></script>
+
+  <script src="js/jquery.barrating.min.js"></script>
+
+
+  <script>
+    $(document).ready(function(){
+  // // Initialize Tooltip
+  // $('[data-toggle="tooltip"]').tooltip();
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    // Prevent default anchor click behavior
+    event.preventDefault();
+    // Store hash
+    var hash = this.hash;
+    // Using jQuery's animate() method to add smooth page scroll
+    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+    $('html, body').animate({
+      scrollTop: $(hash).offset().top
+    }, 900, function(){
+      // Add hash (#) to URL when done scrolling (default click behavior)
+      window.location.hash = hash;
+    });
+  });
+})
+    function switchMain(){
+      location.href = "index.html";
+    }
+    function switchHome(){
+      location.href = "home.html";
+    }
+
+//Getting more pictures from server
+function callServer(){
+  var url = "http://127.0.0.1:3000/morePics/"
+  $.get(url,{id:1020}, function(data){
+    if(data==='picutres_recived'){
+      alert("new pics");
+    }
+  });
+}
+
+
+
+</script>
+</body>
+</html>
