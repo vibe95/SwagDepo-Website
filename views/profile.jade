@@ -1,0 +1,237 @@
+extends ./layout.jade
+block content
+  body#myPage(data-spy='scroll', data-target='.navbar', data-offset='50')
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') Swag Depo
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(type='button', data-toggle='modal', data-target='#upload') Upload Picture
+            li
+              a(type='button', data-toggle='modal', data-target='#edit') EDIT
+            li
+              a(type='button', href='/stream/stream') Photo Stream
+            li
+              a(type='button', href='/user/logout') Sign Out
+    // Upload Box
+    #upload.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Upload A Picture
+          .modal-body
+            fieldset#inputs
+              h3 Title:
+              input#Utitle(type='name', name='title', placeholder='Create A title', required='', size = "40")
+              br
+              br
+              h3 Set As Profile Picture::
+              form(name = "SetAs", action='form_action.asp')
+                input(type='radio', name='setAs', value='yes')  
+                |  Yes         
+                input(type='radio', name='setAs', value='no') 
+                |  No
+              br
+              br
+              h3 About Picture:
+              textarea#Udescription.Feedback_text(rows='5',cols ="60") Your Description
+              br
+              br
+              h3 Set Styles for picture:
+              form(name = "tagsUp", action='form_action.asp')
+                select#selTagUp(name='tag', multiple='')
+              br
+              br
+              input(type='file', id="file",  onchange='readFile(this);')
+              button(onclick='uploadpic();') Upload Picture
+              img#newPic(src='#', alt='your image')
+              button(onclick='showpic()') Show pic
+              p#tags1
+                | Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.
+              
+            br
+            button#btnLogin.btn(type='button',onclick='update()') Save
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+    // Edit Box
+    #edit.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Edit Your Profile
+          .modal-body
+            fieldset#inputs
+              h3 Full name:
+              input#Efullname(type='name', name='Ename', placeholder='Change Your Name', required='', size = "40")
+              br
+              br
+              h3 Location:
+              input#Elocation(type='name', name='Elocation', placeholder='Your Location', required='',size = "40")
+              br
+              br
+              h3 About Me:
+              textarea#Edescription.Feedback_text(rows='5',cols ="60") Your Description
+              br
+              br
+              h3 Styles:
+              form(name = "tagsE", action='form_action.asp')
+                select#selTagE(name='tag', multiple='')
+                  
+              p#tags1
+                | Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.
+              
+            br
+            button#btnLogin.btn(type='button',onclick='update()') Save
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+    #intro.container.text-center
+      div
+        h2#name Test User
+        h5#username Username
+        img.img-rounded(src='../../img/profile.jpg', alt='Test User', width='327.6', height='491.6')
+      h3#location From Place, Province
+    #aboutme.container.text-center
+      h3 About Me
+      p#description
+        | Style is my passion. I'm currently in love with the Yeezy style for its casual, yet modern and disctict style. I hope you guys would be inspired =)
+      h3 Styles
+      p#Mystyles
+        | Put Styles here
+    #imgGallery.container
+      h2 Image Gallery
+      br
+      br
+      .row
+        .col-md-4
+          a.Picture(href='../../img/pic1.jpg', rel='lightbox[group]', data-title='Shadow')
+            img(src='../../img/pic1.jpg', alt='img1')
+        .col-md-4
+          a.Picture(href='../../img/pic2.jpg', rel='lightbox[group]', data-title='')
+            img(src='../../img/pic2.jpg', alt='img2')
+        .col-md-4
+          a.Picture(href='../../img/pic3.jpg', rel='lightbox[group]', data-title='My New Kicks')
+            img(src='../../img/pic3.jpg', alt='img3')
+      br
+      #row2.row
+        .col-md-4
+          a.Picture(href='../../img/pic4.jpg', rel='lightbox[group]', data-title='')
+            img(src='../../img/pic4.jpg', alt='img4')
+        .col-md-4
+          a.Picture(href='../../img/pic5.jpg', rel='lightbox[group]', data-title='')
+            img(src='../../img/pic5.jpg', alt='img5')
+        .col-md-4
+          a.Picture(href='../../img/pic6.jpg', rel='lightbox[group]', data-title='')
+            img(src='../../img/pic6.jpg', alt='img6')
+    // Footer
+    
+    footer.text-center(style = "position:inherit;")
+      a.up-arrow(href='#myPage', data-toggle='tooltip', title='TO TOP')
+        span.glyphicon.glyphicon-chevron-up
+      br
+      br
+      
+      pre.
+        Made By   SD Incorporated
+        
+        
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='./../../js/lightbox.js')
+    script(src='./../../js/helpers.js')
+    
+    style.
+      .Picture img {
+      overflow:hidden;
+      border-radius: 0px;
+      border: 2px solid #444;
+      height:300px;
+      display: flex;
+      vertical-align: middle;
+      width: 295px;
+      text-align: center;
+      opacity: .75;
+      position: relative;
+      }
+      .Picture img:hover {
+      opacity: 1;
+      }
+      
+    script.
+      window.onload = function uploadUser(){
+      document.getElementById("name").innerHTML = "!{profile_user.fullname}";
+      document.getElementById("username").innerHTML = "!{profile_user.username}"
+      document.getElementById("location").innerHTML = "!{profile_user.location}";
+      document.getElementById("description").innerHTML = "!{profile_user.description}";
+      document.getElementsByName('Ename')[0].placeholder= "!{profile_user.fullname}";
+      document.getElementsByName('Elocation')[0].placeholder= "!{profile_user.location}";
+      document.getElementById('Edescription').innerHTML= "!{profile_user.description}";
+      var stylesList = [];
+      var userStyles = "!{profile_user.styles}".split(",");
+      for(i = 0; i<userStyles.length;i++){
+      stylesList.push(" "+userStyles[i]);
+      }
+      document.getElementById("Mystyles").innerHTML = stylesList;
+      var newlist = !{styles};
+      //Need to loop twice for it to show in both sections
+      for (i = 0; i<newlist.length; i++){
+      var option = $('<option></option>').val(newlist[i]).text(newlist[i]);
+      $(document.getElementById("selTagE")).append(option);
+      }
+      for (i = 0; i<newlist.length; i++){
+      var option = $('<option></option>').val(newlist[i]).text(newlist[i]);
+      $(document.getElementById("selTagUp")).append(option);
+      }
+      }
+      //Part of the edit function Need to fix styles by checking if it was left blank
+      function update(){
+      //check what fields have changed
+      if (document.getElementById("Efullname").value == ""){
+      var name = "!{profile_user.fullname}";
+      }else{
+      var name = document.getElementById("Efullname").value;
+      }
+      if (document.getElementById("Elocation").value == ""){
+      var location = "!{profile_user.location}";
+      }else{
+      var location = document.getElementById("Elocation").value;
+      }
+      if (document.getElementById("Edescription").value == ""){
+      var description = "!{profile_user.description}";
+      }else{
+      var description = document.getElementById("Edescription").value;
+      }
+      //get tags
+      var tagForm = document.forms.tagsE;
+      var selectedTags = [];
+      var x = 0;
+      for (x=0;x<tagForm.tag.length;x++){
+      if (tagForm.tag[x].selected){
+      //Saved as a list 
+      selectedTags.push(tagForm.tag[x].value);
+      }
+      }
+      if (selectedTags == [] || selectedTags == null){
+      selectedTags =  "!{profile_user.styles}";
+      }
+      //Call the server here and change the info
+      $.post('/user/profile/updateinfo',{fullname: name,location:location, description: description, styles:selectedTags},function(data){
+      if(data.error){
+      alert(data.error);
+      }
+      alert(data.success);
+      window.location.reload();
+      });      
+      }
+      
+      
+      
+      
+      

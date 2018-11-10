@@ -1,0 +1,177 @@
+extends ./layout.jade
+block content
+  body#myPage(data-spy='scroll', data-target='.navbar', data-offset='50')
+    // NavBar
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#myPage') Swag Depo
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#myPage') HOME
+            li
+              a(href='#intro') INTRO
+            li
+              a(href='#contact') CONTACT
+            li
+              if !user
+                a(type='button', data-toggle='modal', data-target='#registration') REGISTER
+              else
+                a(href='/user/profile') PROFILE
+            if !user
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  | SIGN IN
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    #login-content
+                      form.form
+                        fieldset#inputs
+                          input#email(type='email', name='Email', placeholder='Your email address', required='')
+                          input#password(type='password', name='Password', placeholder='Password', required='')
+                        fieldset#actions
+                          button#btnLogin.btn(type='button', onclick='login()') Sign In
+            else
+              li
+                a(href='/user/logout') SIGN OUT 
+                           
+            li
+              a.dropdown-toggle(data-toggle='dropdown', href='#')
+                span.glyphicon.glyphicon-search
+              ul.dropdown-menu
+                li
+                  #login-content
+                    form.form
+                      fieldset#inputs
+                        input#SUsername(type='email', name='Email', placeholder='Enter username', required='')
+                      fieldset#actions
+                        button#btnLogin.btn(type='button', onclick='searchUser()') Search for User
+
+    // Cover Image Slide Show
+    #myCarousel.carousel.slide(data-ride='carousel')
+      ol.carousel-indicators
+        li.active(data-target='#myCarousel', data-slide-to='0')
+        li(data-target='#myCarousel', data-slide-to='1')
+        li(data-target='#myCarousel', data-slide-to='2')
+      .carousel-inner(role='listbox')
+        .item.active
+          img(src='img/hp1.jpg', alt='1', width='1200', height='700')
+          .carousel-caption
+            h3 Be Inspired
+            p Take ideas from your favorite stylists.
+        .item
+          img(src='img/hp2.jpg', alt='2', width='1200', height='700')
+          .carousel-caption
+            h3 Update Your Style
+            p Transform your fashion to match the lastest trends.
+        .item
+          img(src='img/hp3.jpg', alt='3', width='1200', height='700')
+          .carousel-caption
+            h3 Create New Trends
+            p Let your creativity inspires others.
+      // Slide show controls
+      a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+        span.sr-only Previous
+      a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+        span.sr-only Next
+    // Registration Box
+    #registration.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Welcome To Swag Depo
+          .modal-body
+            fieldset#inputs
+              h3#error(style = "color:red;")
+              h3 Email:
+              input#Remail(type='email', name='Email', placeholder='Your email address', required='')
+              br
+              h3 Username:
+              input#Rusername(type='name', name='Username', placeholder='Your Username', required='')
+              h3 Password:
+              input#Rpassword(type='password', name='Password', placeholder='Password', required='')
+              br
+              h3 Confirm Password:
+              input#Rcpassword(type='password', name='Confirm Password', placeholder='Confirm Password', required='')
+              br
+            br
+            button#btnLogin.btn(type='button',onclick='signup()') Register
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+    // Intro
+    #intro.container.text-center
+      h3 WHAT ARE WE?
+      p
+        | Swag Depot aims to be your centralized place to be inspired by the lastest trends in fashion.
+        | We offer recomendation based on your styling preference. You can also follow the latest updates from your favorite stylists.
+    // Contact
+    #contact.container.text-center
+      h3.text-center Contact
+      p.text-center
+        em Let us know what you think.
+      .row
+        .col-md-4
+          p We value any feedback as we are always looking to improve.
+          p
+            span.glyphicon.glyphicon-map-marker
+            | Toronto, Canada
+          p
+            span.glyphicon.glyphicon-phone
+            | Phone: +1 4161234567
+          p
+            span.glyphicon.glyphicon-envelope
+            | Email: swagdepo@gmail.com
+        .col-md-8
+          .row
+            .col-sm-6.form-group
+              input#name.form-control(name='name', placeholder='Name', type='text', required='')
+            .col-sm-6.form-group
+              input#email.form-control(name='email', placeholder='Email', type='email', required='')
+          textarea#comments.form-control(name='comments', placeholder='Comment', rows='5')
+          br
+          .row
+            .col-md-12.form-group
+              button.btn.pull-right(type='submit') Send
+      br
+      h3.text-center Meet the Team
+      ul.nav.nav-tabs
+        li
+          a(data-toggle='tab', href='#menu1') Duy
+        li
+          a(data-toggle='tab', href='#menu2') Brandon
+        li
+          a(data-toggle='tab', href='#menu3') Vibi
+      .tab-content
+        #home.tab-pane.fade.in.active
+        #menu1.tab-pane.fade
+          h2 Duy
+          p
+            | Always a pleasure people! Hope you enjoyed it as much as I did. Could I BE.. any more pleased?
+        #menu2.tab-pane.fade
+          h2 Brandon
+          p I mean, sometimes I enjoy the show, but other times I enjoy other things.
+        #menu3.tab-pane.fade
+          h2 Vibi
+          p The future is key.
+    footer.text-center(style = "position:inherit;")
+      a.up-arrow(href='#myPage', data-toggle='tooltip', title='TO TOP')
+        span.glyphicon.glyphicon-chevron-up
+      br
+      br
+      pre.
+        Made By   SD Incorporated       
+        
+         
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='./../../js/helpers.js')
+      
